@@ -4,7 +4,7 @@ const redis = Redis.fromEnv();
 const MAX_GLOBAL_REQUESTS = 20;
 
 export async function handler(event) {
-  const allowedOrigin = "https://virtual-puppet.netlify.app";
+  const allowedOrigin = "https://phoebekim.netlify.app";
   const origin = event.headers.origin;
 
   // Handle preflight (CORS OPTIONS)
