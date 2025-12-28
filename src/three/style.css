@@ -1,0 +1,391 @@
+@import url("https://fonts.googleapis.com/css2?family=Pangolin&display=swap");
+
+
+/* .liveContainer {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+} */
+
+/* ------------------------------------- */
+/*  THREE.JS MOUNTING AREA               */
+/* ------------------------------------- */
+
+.three-mount {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* Pangolin font utility */
+.pangolin-regular {
+    font-family: "Pangolin", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    font-family: "Pangolin", cursive;
+}
+
+/* ------------------------------------- */
+/*  BUTTONS / TOGGLES                    */
+/* ------------------------------------- */
+
+#liveContainer #toggleIdle {
+    position: absolute;
+    left: 16px;
+    z-index: 5;
+}
+
+/* ------------------------------------- */
+/* PREVIEW VIDEO                         */
+/* ------------------------------------- */
+
+.preview {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #222;
+    z-index: 4;
+}
+
+video {
+    max-width: 400px;
+    height: auto;
+    transform: scale(-1, 1);
+}
+
+.preview canvas {
+    transform: scale(-1, 1);
+}
+
+/* ------------------------------------- */
+/* FULLSCENE LAYOUT                      */
+/* ------------------------------------- */
+
+#liveContainer html,
+#liveContainer body {
+    height: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+#liveContainer canvas {
+    display: block;
+    z-index: 1;
+}
+
+/* ------------------------------------- */
+/* GUIDES / MEDIA PIPE VISUALS           */
+/* ------------------------------------- */
+
+.guides {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: auto;
+    width: 100%;
+    z-index: 2;
+}
+
+/* ------------------------------------- */
+/* NAVIGATION ICONS                      */
+/* ------------------------------------- */
+
+nav {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    display: flex;
+    z-index: 10000;
+}
+
+nav img {
+    width: 36px;
+    height: auto;
+    margin-left: 22px;
+}
+
+/* ------------------------------------- */
+/* SECTION OVERLAY UI                    */
+/* ------------------------------------- */
+
+#liveContainer section {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 32px 0 16px 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background: linear-gradient(0deg, black 0%, transparent 100%);
+    color: white;
+    z-index: 3;
+}
+
+#liveContainer p {
+    color: white;
+    padding: 8px 16px;
+    margin: 0;
+    font-family: "Pangolin", cursive;
+}
+
+/* ------------------------------------- */
+/* PREVIEW LINKS                         */
+/* ------------------------------------- */
+
+#liveContainer .preview a {
+    border-radius: 24px;
+    margin: 0 4px;
+}
+
+#liveContainer .preview a:hover {
+    background: #ffffff20;
+}
+
+#liveContainer a.current {
+    background: #13a3f3;
+    pointer-events: none;
+}
+
+/* ------------------------------------- */
+/* LINK OUT BUTTON                       */
+/* ------------------------------------- */
+
+#liveContainer .linkOut {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    display: inline;
+    color: white;
+    padding: 0;
+    z-index: 4;
+}
+
+/* ------------------------------------- */
+/* RESPONSIVE                            */
+/* ------------------------------------- */
+
+@media only screen and (max-width: 600px) {
+    #liveContainer video {
+        max-width: 160px;
+    }
+}
+
+#liveContainer .hidden {
+    display: none !important;
+}
+
+/* ------------------------------------- */
+/* CHAT UI                               */
+/* ------------------------------------- */
+
+#liveContainer #chat-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.75);
+    padding: 10px;
+    box-sizing: border-box;
+    backdrop-filter: blur(6px);
+    z-index: 5;
+}
+
+#liveContainer #chat-input {
+    width: clamp(200px, 70%, 600px);
+    font-family: "Pangolin", cursive;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    margin-right: 10px;
+    font-size: 16px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+#liveContainer #send-btn {
+    font-family: "Pangolin", cursive;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background: #505963;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+#liveContainer #send-btn:hover {
+    background: #97a0aa;
+}
+
+/* CHAT BUBBLE */
+#liveContainer #chat-area {
+    position: fixed;
+    bottom: 90px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 5;
+}
+
+#liveContainer .chat-bubble {
+    position: relative;
+    display: inline-block;
+    background: url("../public/theater/chatbubble.png") no-repeat center/contain;
+    width: 500px;
+    height: 200px;
+    text-align: center;
+    color: #000000;
+    font-family: "Pangolin", cursive;
+    font-size: 18px;
+    padding: 20px;
+    line-height: 1.2;
+    opacity: 0;
+    animation: fadeIn 0.3s ease forwards, fadeOut 1s ease 9s forwards;
+}
+
+#liveContainer .chat-bubble span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: pre-wrap;
+}
+
+/* ------------------------------------- */
+/* ANIMATIONS                            */
+/* ------------------------------------- */
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeOut {
+    to  { opacity: 0; transform: scale(0.9); }
+}
+
+/* NAV ICONS */
+.nav-icon {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+}
+
+.nav-icon:hover {
+    animation: jiggle 0.8s ease-in-out infinite;
+}
+
+@keyframes jiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(3deg); }
+    50% { transform: rotate(-3deg); }
+    75% { transform: rotate(2deg); }
+}
+
+/* PASSWORD SCREEN */
+#liveContainer #password-screen {
+    position: fixed;
+    inset: 0;
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.6s ease;
+}
+
+#liveContainer #password-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#liveContainer #password-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: min(90%, 350px);
+    padding: 40px 5vw;
+    text-align: center;
+}
+
+#liveContainer #password-box h2 {
+    color: white;
+}
+
+#liveContainer #password-box input {
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    width: 180px;
+    text-align: center;
+    outline: none;
+    font-size: 1rem;
+    background: white;
+    color: black;
+}
+
+#liveContainer #password-error {
+    color: #ff6961;
+    font-size: 0.9rem;
+    height: 1.2rem;
+}
+
+/* LOADING SCREEN */
+#loading-screen {
+    position: fixed;
+    inset: 0;
+    background: #000000;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    z-index: 9999;
+    transition: opacity 0.7s ease;
+}
+
+#loading-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Wave animation */
+.wave-text span {
+    display: inline-block;
+    animation: wave 1.2s infinite ease-in-out;
+}
+
+.wave-text span:nth-child(1) { animation-delay: 0s; }
+.wave-text span:nth-child(2) { animation-delay: 0.1s; }
+.wave-text span:nth-child(3) { animation-delay: 0.2s; }
+.wave-text span:nth-child(4) { animation-delay: 0.3s; }
+.wave-text span:nth-child(5) { animation-delay: 0.4s; }
+.wave-text span:nth-child(6) { animation-delay: 0.5s; }
+.wave-text span:nth-child(7) { animation-delay: 0.6s; }
+.wave-text span:nth-child(8) { animation-delay: 0.7s; }
+.wave-text span:nth-child(9) { animation-delay: 0.8s; }
+.wave-text span:nth-child(10){ animation-delay: 0.9s; }
+
+@keyframes wave {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-12px); }
+}
