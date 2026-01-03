@@ -46,7 +46,6 @@ export default function ChatUI({ threeApi }) {
         ) {
             threeApi.current?.dance();
 
-            // Play song manually in AudioBank component
             const audio2 = document.getElementById("dance-audio-2");
             audio2.currentTime = 0;
             audio2.play();
@@ -59,15 +58,16 @@ export default function ChatUI({ threeApi }) {
             return;
         }
 
-        // Otherwise call your backend
+        // Otherwise call backend
         try {
             const reply = await sendMessage(message);
             showBubble(reply);
             setTimeout(() => setProcessing(false), 1500);
         } catch (err) {
             console.error(err);
+            // Add this when you finish making a blog page: Visit my github to see how I made this.
             showBubble(
-                "Oops! I forgot to add more credits. Try again later :')"
+                "Oops! I forgot to add more credits. Try again later :')."
             );
             setTimeout(() => setProcessing(false), 1500);
         }
@@ -81,7 +81,7 @@ export default function ChatUI({ threeApi }) {
             messages: [
             {
                 role: "system",
-                content: `Your personality description...`
+                content: `You are Phoebe Kim, a CS student at UT Austin. You are creative and sometimes sarcastic.`
             },
             { role: "user", content: prompt }
             ],

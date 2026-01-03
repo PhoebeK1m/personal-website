@@ -78,12 +78,14 @@ export default function Home() {
             </section>
 
             <section className="section light">
-                <h2>Crafting personalized experiences:</h2>
-                <p>
-                    I’m a CS student exploring the space between software, AI, and digital creativity.
-                    I love building projects that combine full-stack engineering with interactive 
-                    design and machine learning.
-                </p>
+                <div className="pfp-caption">
+                    <p>
+                        Hi! I'm Phoebe. I love creating <a href="https://github.com/PhoebeK1m">things</a> by combining my passion in art and programming.
+                    </p>
+                </div>
+                <div className="pf-header">
+                    <div className="pfp-wrapper"><img src="/phoebe.jpg" alt="" class="pfp"/></div>
+                </div>
             </section>
 
             <section className="section image-section">
@@ -102,10 +104,9 @@ export default function Home() {
                     </a>
 
                 <div className="video-description">
-                    <h2>Ask me anything!</h2>
-                    <p>
-                        Visit virtual Phoebe and ask any of your questions. Built with Three.js and
-                        finetuned on gpt-4o with my chat messages.
+                    <h2>Visit puppet me and ask me anything!</h2>
+                    <p className="video-description-subtitle">
+                        Built with Three.js and finetuned on gpt-4o with my chat messages.
                     </p>
                 </div>
             </section>
