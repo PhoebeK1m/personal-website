@@ -12,7 +12,7 @@ import Navbar from "./components/Navbar";
 import Audio from "./components/Audio";
 
 export default function App() {
-  const threeApi = useRef(null);
+const threeApi = useRef(null);
 
   return (
     <>

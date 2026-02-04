@@ -12,7 +12,7 @@ export default function Navbar() {
                     <img src="camera.png" alt="Live" className="nav-icon" />
                 </Link>
 
-                <a href="/">
+                <a href="/Ethics of a Virtual Clone.pdf">
                     <img src="resume.png" alt="Resume" className="nav-icon" />
                 </a>
             </nav>
