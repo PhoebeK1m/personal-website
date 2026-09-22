@@ -99,6 +99,20 @@ html, body, #root {
     margin-bottom: 0.2em;
 }
 
+.hero-title a {
+    color: inherit;
+    font-weight: inherit;
+    text-decoration: none;
+}
+
+.hero-title a:hover,
+.hero-title a:focus-visible {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 0.04em;
+    text-underline-offset: 0.12em;
+}
+
 .hero, .section {
     position: relative;
     width: 100%;
@@ -165,7 +179,7 @@ html, body, #root {
 .section.dark {
     background: #000;
     color: #fff;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .section h2 {
@@ -297,39 +311,292 @@ html, body, #root {
     opacity: 1;
 }
 
-/* Project Cards */
-.grid {
-    display: grid;
-    gap: 40px;
-    margin: 50px;
+/* Project carousel */
+.work-section {
+    box-sizing: border-box;
+    padding: 9vh 0 8vh;
+    overflow: hidden;
 }
 
-@media (min-width: 700px) {
-    .grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
+.work-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 0 6vw 2.5rem;
+    text-align: left;
+}
+
+.work-header .work-kicker {
+    margin: 0 0 1rem;
+    color: #aaa;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.work-header h2 {
+    margin: 0;
+    font-size: clamp(2.75rem, 6vw, 5.75rem);
+    line-height: 0.95;
+}
+
+.work-count {
+    display: flex;
+    gap: 0.5rem;
+    align-items: baseline;
+    color: #777;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+}
+
+.work-count span:first-child {
+    color: #fff;
+    font-size: 1.35rem;
+}
+
+.work-carousel {
+    position: relative;
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 5rem;
+}
+
+.work-viewport {
+    overflow: hidden;
+}
+
+.work-track {
+    display: flex;
+    transition: transform 550ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.project-card {
+    flex: 0 0 100%;
+    min-width: 0;
+    color: inherit;
+    text-decoration: none;
+}
+
+.carousel-arrow {
+    position: absolute;
+    top: calc(min(100vw - 10rem, 880px) * 0.28125);
+    z-index: 4;
+    display: grid;
+    width: 3.5rem;
+    height: 3.5rem;
+    padding: 0;
+    place-items: center;
+    border: 1px solid #555;
+    border-radius: 50%;
+    background: #000;
+    color: #fff;
+    transform: translateY(-50%);
+    transition: background 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+
+.carousel-arrow-previous {
+    left: 0;
+}
+
+.carousel-arrow-next {
+    right: 0;
+}
+
+.carousel-arrow svg {
+    width: 1.35rem;
+    height: 1.35rem;
+    display: block;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.7;
+}
+
+.carousel-arrow:hover,
+.carousel-arrow:focus-visible {
+    border-color: #fff;
+    background: #fff;
+    color: #000;
+    outline: none;
+}
+
+.project-card:focus-visible {
+    border-radius: 20px;
+    outline: 2px solid #fff;
+    outline-offset: 5px;
 }
 
 .card {
     text-align: left;
 }
 
-.card img {
+.project-visual {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 18px;
+    background: #171717;
+}
+
+.project-visual img {
     width: 100%;
-    border-radius: 16px;
-    margin-bottom: 16px;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform 500ms cubic-bezier(.22, 1, .36, 1);
 }
 
-.card h3 {
-    font-size: 1.4rem;
-    margin-bottom: 6px;
+.project-card:hover .project-visual img {
+    transform: scale(1.025);
 }
 
-.card p {
-    font-size: 1rem;
+.project-copy {
+    padding-top: 1.25rem;
+}
+
+.project-copy > span {
+    color: #999;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+.project-copy h3 {
+    margin: 0.5rem 0 0.25rem;
+    font-family: "Source Serif 4", serif;
+    font-size: clamp(1.65rem, 3vw, 2.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+.project-copy p {
+    max-width: 600px;
+    margin: 0;
+    color: #aaa;
+    font-size: clamp(0.85rem, 1.4vw, 1rem);
     line-height: 1.5;
-    color: #444;
+}
+
+/* Résumé */
+.resume-section {
+    box-sizing: border-box;
+    min-height: 100vh;
+    padding: 10vh 6vw;
+    display: flex;
+    align-items: center;
+    scroll-margin-top: 1rem;
+}
+
+.resume-card {
+    width: min(1100px, 100%);
     margin: 0 auto;
+    padding: clamp(2rem, 5vw, 5rem);
+    box-sizing: border-box;
+    border: 1px solid rgba(17, 17, 17, 0.14);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.55);
+    box-shadow: 0 30px 80px rgba(33, 24, 15, 0.08);
+    color: #111;
+    text-align: left;
+    backdrop-filter: blur(20px);
+}
+
+.resume-heading {
+    max-width: 760px;
+}
+
+.resume-heading .resume-kicker {
+    margin: 0 0 1rem;
+    color: #777;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.resume-heading h2 {
+    margin: 0;
+    font-size: clamp(2.75rem, 6vw, 5.75rem);
+    line-height: 0.95;
+}
+
+.resume-preview-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.resume-preview-heading span {
+    color: #777;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+.resume-preview-heading a {
+    color: #111;
+    font-size: 0.85rem;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
+.resume-preview {
+    width: 100%;
+    height: min(78vh, 850px);
+    display: block;
+    box-sizing: border-box;
+    border: 1px solid rgba(17, 17, 17, 0.16);
+    border-radius: 16px;
+    background: #e9e9e7;
+}
+
+.resume-preview-placeholder {
+    min-height: 520px;
+    padding: 3rem 1.5rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #111;
+    text-align: center;
+}
+
+.resume-preview-placeholder img {
+    width: 6rem;
+    height: 6rem;
+    margin-bottom: 1.5rem;
+    object-fit: contain;
+    filter: invert(1);
+}
+
+.resume-preview-placeholder h3 {
+    margin: 0;
+    font-family: "Source Serif 4", serif;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 400;
+}
+
+.resume-preview-placeholder p {
+    margin: 0.6rem 0 0;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.resume-preview-placeholder code {
+    padding: 0.15rem 0.35rem;
+    border-radius: 4px;
+    background: rgba(17, 17, 17, 0.08);
+    font-size: 0.9em;
 }
 
 @media (max-width: 1200px) {
@@ -355,16 +622,57 @@ html, body, #root {
     }
 }
 
-.card img {
-    width: 100%;
-    border-radius: 16px;
-    box-shadow:
-    0 8px 20px rgba(255, 255, 255, 0.12),
-    0 20px 40px rgba(255, 255, 255, 0.06);
-}
-.img-wrapper {
-    height: 450px;
-    display: flex;
-    align-items: center;
+@media (max-width: 700px) {
+    .work-section {
+        padding-top: 5rem;
+    }
+
+    .work-header {
+        align-items: flex-start;
+        padding-inline: 1.25rem;
+    }
+
+    .work-carousel {
+        padding-inline: 3.75rem;
+    }
+
+    .carousel-arrow {
+        top: calc((100vw - 7.5rem) * 0.28125);
+        width: 2.8rem;
+        height: 2.8rem;
+    }
+
+    .carousel-arrow-previous {
+        left: 0.35rem;
+    }
+
+    .carousel-arrow-next {
+        right: 0.35rem;
+    }
+
+    .resume-section {
+        padding-inline: 1.25rem;
+    }
+
+    .resume-card {
+        padding: 2rem 1.5rem;
+        border-radius: 18px;
+    }
+
+    .resume-preview {
+        height: 70vh;
+    }
+
+    .resume-preview-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .project-visual img,
+    .work-track,
+    .carousel-arrow {
+        transition: none;
+    }
+}

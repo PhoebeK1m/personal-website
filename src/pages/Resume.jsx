@@ -1,10 +1,19 @@
 import "./Resume.css";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 
 
 export default function Home() {
     const blobRef = useRef(null);
+    const [workIndex, setWorkIndex] = useState(0);
+    const projectCount = 3;
+
+    const changeProject = (direction) => {
+        setWorkIndex((currentIndex) =>
+            (currentIndex + direction + projectCount) % projectCount
+        );
+    };
+
     useEffect(() => {
         const container = document.querySelector(".apple-container");
         const sections = document.querySelectorAll(".hero, .section");
@@ -70,7 +79,8 @@ export default function Home() {
             
             {/* Hero */}
             <section className="hero">
-                <h1 className="hero-title">Phoebe Kim
+                <h1 className="hero-title">
+                    <a href="#resume">Phoebe Kim</a>
                 </h1>
                 <p className="subtitle">
                     CS @ UT Austin • Full Stack • AI
@@ -111,36 +121,73 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className="section dark">
-                <h2>Selected Work</h2>
-                <div className="grid">
+            <section className="section dark work-section">
+                <div className="work-header">
+                    <div>
+                        <p className="work-kicker">Selected Work</p>
+                        <h2>Things I&rsquo;ve built.</h2>
+                    </div>
+                    <div className="work-count" aria-live="polite">
+                        <span>{String(workIndex + 1).padStart(2, "0")}</span>
+                        <span>/</span>
+                        <span>{String(projectCount).padStart(2, "0")}</span>
+                    </div>
+                </div>
+
+                <div className="work-carousel">
+                    <button
+                        type="button"
+                        className="carousel-arrow carousel-arrow-previous"
+                        onClick={() => changeProject(-1)}
+                        aria-label="Show previous project"
+                    >
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M14.5 5 7.5 12l7 7" />
+                        </svg>
+                    </button>
+
+                    <div className="work-viewport">
+                    <div
+                        className="work-track"
+                        style={{ transform: `translateX(-${workIndex * 100}%)` }}
+                    >
                     <a
-                    href="/live"
+                    href="https://github.com/PhoebeK1m/caustics-final-project"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="card-link"
+                    className="card-link project-card"
+                    aria-hidden={workIndex !== 0}
+                    tabIndex={workIndex === 0 ? 0 : -1}
                     >
                         <div className="card">
-                            <div className="img-wrapper">
-                                <img src="/vrm.png" alt="" />
+                            <div className="project-visual">
+                                <img src="/pickle_pond.png" alt="Placeholder for the water caustics project" />
                             </div>
-                            <h3>3D Avatar Live Tracking</h3>
-                            <p>Real-time VRM tracking powered by Mediapipe + Three.js</p>
+                            <div className="project-copy">
+                                <span>01 / Computer Graphics</span>
+                                <h3>Real-time Water Caustics</h3>
+                                <p>GPU-driven water simulation and caustic light rendering built with custom shaders and Three.js</p>
+                            </div>
                         </div>
                     </a>
 
                     <a
-                    href="https://nuclear-twins.tacc.utexas.edu/txt2sql"
+                    href="/live"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="card-link"
+                    className="card-link project-card"
+                    aria-hidden={workIndex !== 1}
+                    tabIndex={workIndex === 1 ? 0 : -1}
                     >
                         <div className="card">
-                            <div className="img-wrapper">
-                                <img src="/txt2sql.png" alt=""/>
+                            <div className="project-visual">
+                                <img src="/vrm.png" alt="3D avatar being controlled with body tracking" />
                             </div>
-                            <h3>Txt2SQL for NETL Database</h3>
-                            <p>Natural language access to TRIGA database using Langchain</p>
+                            <div className="project-copy">
+                                <span>02 / Interactive</span>
+                                <h3>3D Puppet Live Tracking</h3>
+                                <p>Real-time VRM tracking powered by Mediapipe + Three.js</p>
+                            </div>
                         </div>
                     </a>
 
@@ -148,16 +195,51 @@ export default function Home() {
                     href="https://github.com/PhoebeK1m/Rod-Pump-Survival-Prediction"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="card-link"
+                    className="card-link project-card"
+                    aria-hidden={workIndex !== 2}
+                    tabIndex={workIndex === 2 ? 0 : -1}
                     >
                         <div className="card">
-                            <div className="img-wrapper">
-                                <img src="/coxph.png" alt=""/>
+                            <div className="project-visual">
+                                <img src="/coxph.png" alt="Survival model analysis charts"/>
                             </div>
-                            <h3>Survival Model Analysis</h3>
-                            <p>Predicted lifetime and hazardous parameters of rod pump data with ConocoPhillips</p>
+                            <div className="project-copy">
+                                <span>03 / Energy + Data</span>
+                                <h3>Survival Model Analysis</h3>
+                                <p>Predicted lifetime and hazardous parameters of rod pump data with ConocoPhillips</p>
+                            </div>
                         </div>
                     </a>
+                    </div>
+                    </div>
+
+                    <button
+                        type="button"
+                        className="carousel-arrow carousel-arrow-next"
+                        onClick={() => changeProject(1)}
+                        aria-label="Show next project"
+                    >
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="m9.5 5 7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+            </section>
+
+            <section className="section resume-section" id="resume">
+                <div className="resume-card">
+                    <div className="resume-heading">
+                        <p className="resume-kicker">Résumé</p>
+                        <h2>A little more about me.</h2>
+                    </div>
+
+                    <div className="resume-preview-heading">
+                        <span></span>
+                        <a href="/Resume_2027.pdf" target="_blank" rel="noopener noreferrer">
+                            Open in a new tab
+                        </a>
+                    </div>
+                    <object className="resume-preview" data="/Resume_2027.pdf" type="application/pdf"></object>
                 </div>
             </section>
         </div>
