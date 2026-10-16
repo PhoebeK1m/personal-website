@@ -229,7 +229,7 @@ export default function Home() {
             <section className="section resume-section" id="resume">
                 <div className="resume-card">
                     <div className="resume-heading">
-                        <p className="resume-kicker">Résumé</p>
+                        <p className="resume-kicker">Resume</p>
                         <h2>A little more about me.</h2>
                     </div>
 
