@@ -65,14 +65,13 @@ html, body, #root {
     --radius: 0px;
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
     color: #111;
-    overflow: hidden; 
+    overflow-x: clip;
     height: auto;
     width: 100%;
     position: relative; 
     min-height: 100vh;  
     height: auto;       
     background: #f5f5f7;
-    overflow-y: scroll;
 }
 
 
@@ -313,9 +312,15 @@ html, body, #root {
 
 /* Project carousel */
 .work-section {
+    --work-image-height: min(42svh, 495px);
+    --work-controls-space: 10rem;
     box-sizing: border-box;
-    padding: 9vh 0 8vh;
+    padding: clamp(1rem, 4svh, 3rem) 0;
     overflow: hidden;
+}
+
+.section.work-section {
+    min-height: 100svh;
 }
 
 .work-header {
@@ -323,7 +328,7 @@ html, body, #root {
     align-items: flex-end;
     justify-content: space-between;
     gap: 2rem;
-    padding: 0 6vw 2.5rem;
+    padding: 0 6vw clamp(1rem, 3svh, 2rem);
     text-align: left;
 }
 
@@ -339,7 +344,7 @@ html, body, #root {
 
 .work-header h2 {
     margin: 0;
-    font-size: clamp(2.75rem, 6vw, 5.75rem);
+    font-size: clamp(2rem, min(6vw, 8svh), 5rem);
     line-height: 0.95;
 }
 
@@ -358,10 +363,11 @@ html, body, #root {
 }
 
 .work-carousel {
+    box-sizing: border-box;
     position: relative;
-    max-width: 1040px;
+    width: min(100%, calc(var(--work-image-height) * 16 / 9 + var(--work-controls-space)));
     margin: 0 auto;
-    padding: 0 5rem;
+    padding: 0 calc(var(--work-controls-space) / 2);
 }
 
 .work-viewport {
@@ -382,7 +388,7 @@ html, body, #root {
 
 .carousel-arrow {
     position: absolute;
-    top: calc(min(100vw - 10rem, 880px) * 0.28125);
+    top: calc(min((100vw - var(--work-controls-space)) * 9 / 16, var(--work-image-height)) / 2);
     z-index: 4;
     display: grid;
     width: 3.5rem;
@@ -455,7 +461,8 @@ html, body, #root {
 }
 
 .project-copy {
-    padding-top: 1.25rem;
+    padding-top: clamp(0.5rem, 2svh, 1.25rem);
+    line-height: 1.2;
 }
 
 .project-copy > span {
@@ -624,20 +631,16 @@ html, body, #root {
 
 @media (max-width: 700px) {
     .work-section {
-        padding-top: 5rem;
+        --work-controls-space: 7.5rem;
     }
 
     .work-header {
         align-items: flex-start;
+        gap: 1rem;
         padding-inline: 1.25rem;
     }
 
-    .work-carousel {
-        padding-inline: 3.75rem;
-    }
-
     .carousel-arrow {
-        top: calc((100vw - 7.5rem) * 0.28125);
         width: 2.8rem;
         height: 2.8rem;
     }
